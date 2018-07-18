@@ -6,7 +6,7 @@ import java.awt.Graphics;
 import Misc.Assets;
 
 public class BasicHouse extends Entity{
-	public int tick=0,income=100,image;
+	public int tick=0,income=100,image,level=1;
 	public boolean ting=false;
 	public BasicHouse(int x,int y){
 		this.x=x;
@@ -20,7 +20,7 @@ public class BasicHouse extends Entity{
 	}
 	public void timeTick(){
 		ting=true;tick=10;
-		GameState.World.money+=income;
+		GameState.World.money+=income*level;
 	}
 	public void render(Graphics g){
 		prerender();
@@ -33,10 +33,17 @@ public class BasicHouse extends Entity{
 		}
 		if(tick>0){
 			tick--;
-			g.drawImage(Assets.assets[14],tx+(tsx/4),ty,tsx-(tsx/4)*2,tsy-(tsy/4)*2,null);
+			for(int x=0;x<level;x++) {
+			g.drawImage(Assets.assets[14],tx+(tsx/4)+(4*x),ty,tsx-(tsx/4)*2,tsy-(tsy/4)*2,null);
+			}
 		}
 		ting=false;
 		g.setColor(Color.BLACK);
 		g.drawRect(tx,ty,tsx,tsy);
+	}
+	public void upgrade(){
+		int upcost=(int)(cost*(Math.pow(level+1, 2)));
+		GameState.World.money-=upcost;
+		level++;
 	}
 }

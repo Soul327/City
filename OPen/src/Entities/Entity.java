@@ -36,4 +36,7 @@ public abstract class Entity {
 	public void remove() {
 		
 	}
+	public void upgrade(){
+		
+	}
 }
