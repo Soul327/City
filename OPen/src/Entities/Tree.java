@@ -11,7 +11,7 @@ public class Tree extends Entity{
 	public int tick=0,income=0,image;
 	public Tree(int x,int y){
 		this.x=x;
-		this.y=y;
+		this.y=y-2;
 		sx=2;sy=2;
 		cost=100;
 	}

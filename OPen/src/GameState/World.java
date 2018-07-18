@@ -59,6 +59,9 @@ public class World {
 		if(Game.keyManager.d&tick==0){x++;tick++;}
 		if(Game.keyManager.x&tick==0&scale>2){scale--;tick++;}
 		if(Game.keyManager.z&tick==0&scale<200){scale++;tick++;}
+		if(Game.keyManager.i&tick==0){
+			
+		}
 		boolean flip=false;
 		Entity temp=null;
 		int z=0;
