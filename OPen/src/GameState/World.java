@@ -45,6 +45,7 @@ public class World {
 		if(tick!=0){tick++;}if(tick>10){tick=0;}
 		if(timeTick!=0){timeTick++;}
 		if(timeTick>tickrate){timeTick=0;}
+		for(int z=0;z<entity.size();z++){entity.get(z).tick();}
 		if(timeTick==0){
 			//System.out.println("");
 			y2=y1;
@@ -66,8 +67,7 @@ public class World {
 		if(Game.keyManager.space&tick==0){Game.debug=!Game.debug;tick++;}
 		boolean flip=false;
 		Entity temp=null;
-		int z=0;
-		for(z=0;z<entity.size();z++){
+		for(int z=0;z<entity.size();z++){
 			for(int t1=0;t1<entity.get(z).sx;t1++){
 				for(int t2=0;t2<entity.get(z).sy;t2++){
 					if(entity.get(z).x+t1==x & entity.get(z).y+t2==y){
@@ -94,7 +94,7 @@ public class World {
 		}	
 			if(Game.keyManager.upgrade&&!(temp==null)&tick==0){temp.upgrade();tick++;};
 		sort();
-		for(z=0;z<entity.size();z++){entity.get(z).tick();}
+		
 		trainers=(int)((v*1)*pre);
 		if(need<0){need=0;}
 		if(need>100){need=100;}

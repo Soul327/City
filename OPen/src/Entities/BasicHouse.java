@@ -7,7 +7,7 @@ import GameState.World;
 import Misc.Assets;
 
 public class BasicHouse extends Entity{
-	public int tick=0,income=100,image,level=1;
+	public int tick=0,income=4,image,level=1,temp=0;
 	public boolean ting=false;
 	public BasicHouse(int x,int y){
 		this.x=x;
@@ -22,8 +22,10 @@ public class BasicHouse extends Entity{
 		World.need-=5;
 	}
 	public void timeTick(){
-		ting=true;tick=10;
-		GameState.World.money+=income*level;
+		//ting=true;
+		temp=income*level*World.need;
+		GameState.World.money+=temp;
+		if(temp!=0){tick=10;}
 	}
 	public void render(Graphics g){
 		prerender();
@@ -36,15 +38,15 @@ public class BasicHouse extends Entity{
 		}
 		if(tick>0){
 			tick--;
-			for(int x=0;x<level;x++) {
-			g.drawImage(Assets.assets[14],tx+(tsx/4)+(4*x),ty,tsx-(tsx/4)*2,tsy-(tsy/4)*2,null);
-			}
+			renderIncome(g,temp);
 		}
-		ting=false;
+		//ting=false;
 	}
 	public void upgrade(){
 		int upcost=(int)(cost*(Math.pow(level+1, 2)));
-		GameState.World.money-=upcost;
-		level++;
+		if(World.money>=upcost){
+			GameState.World.money-=upcost;
+			level++;
+		}
 	}
 }

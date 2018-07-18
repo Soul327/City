@@ -7,7 +7,7 @@ import Main.Game;
 import Misc.Assets;
 
 public abstract class Entity {
-	public int x=0,y=0,sx=1,sy=1,tx=0,ty=0,tsx=0,tsy=0,cost=0,fontSize=12;
+	public int x=0,y=0,sx=1,sy=1,tx=0,ty=0,tsx=0,tsy=0,cost=0,fontSize=12,incame=0;
 	String name="Missing Name";
 	public void tick(){
 		
@@ -32,6 +32,24 @@ public abstract class Entity {
 		g.fillRect(tx,ty,tsx,tsy);
 		//g.setColor(Color.BLACK);
 		//g.drawRect(tx,ty,tsx,tsy);
+	}
+	public void renderIncome(Graphics g,int incame){
+		int platinum=0,gold=0,silver=0,bronze=incame,loc=0,inc=10,tot;
+		silver=(int)(bronze/inc);
+		bronze=(bronze%inc);
+		gold=(int)(silver/inc);
+		silver=(silver%inc);
+		platinum=(int)(gold/inc);
+		gold=(gold%inc);
+		tot=bronze+silver+gold+platinum;
+		for(int x=0;x<platinum;x++){
+			g.drawImage(Assets.assets[18],(tx+(tsx/4)+(4*loc))-(tot*2),ty,tsx-(tsx/2),tsy-(tsy/2),null);loc++;}
+		for(int x=0;x<gold;x++){
+			g.drawImage(Assets.assets[17],(tx+(tsx/4)+(4*loc))-(tot*2),ty,tsx-(tsx/2),tsy-(tsy/2),null);loc++;}
+		for(int x=0;x<silver;x++){
+			g.drawImage(Assets.assets[16],(tx+(tsx/4)+(4*loc))-(tot*2),ty,tsx-(tsx/2),tsy-(tsy/2),null);loc++;}
+		for(int x=0;x<bronze;x++){
+			g.drawImage(Assets.assets[15],(tx+(tsx/4)+(4*loc))-(tot*2),ty,tsx-(tsx/2),tsy-(tsy/2),null);loc++;}
 	}
 	public void renderDebug(Graphics g){
 		int z=1;

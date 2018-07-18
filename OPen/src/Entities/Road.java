@@ -14,6 +14,9 @@ public class Road extends Entity{
 		GameState.World.tickrate-=(1.0/60)*GameState.World.tickrate;
 		name="Road";
 	}
+	public void timeTick(){
+		GameState.World.money-=1;
+	}
 	public void render(Graphics g){
 		prerender();
 		g.drawImage(Assets.assets[5],tx,ty,tsx,tsy,null);

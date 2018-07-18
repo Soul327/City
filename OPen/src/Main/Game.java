@@ -24,7 +24,7 @@ public class Game implements Runnable {
 	public String title;
 	String[] info= {"","","",""};
 	boolean in=false;
-	public static boolean debug=true;
+	public static boolean debug=false;
 	private boolean running = false;
 	private Thread thread;
 	

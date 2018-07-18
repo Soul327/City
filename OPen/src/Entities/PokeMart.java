@@ -18,7 +18,9 @@ public class PokeMart extends Entity{
 	public void timeTick(){
 		income=-100;
 		income+=(GameState.World.trainers*1000*Math.random());
+		incame=income;
 		GameState.World.money+=income;
+		tick=10;
 	}
 	public void tick(){
 		World.need+=10;
@@ -26,7 +28,9 @@ public class PokeMart extends Entity{
 	public void render(Graphics g){
 		prerender();
 		g.drawImage(Assets.assets[11],tx,ty,tsx,tsy,null);
-		g.setColor(Color.BLACK);
-		g.drawRect(tx,ty,tsx,tsy);
+		if(tick>0){
+			tick--;
+			renderIncome(g,incame);
+		}
 	}
 }
