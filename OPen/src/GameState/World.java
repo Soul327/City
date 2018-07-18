@@ -35,6 +35,7 @@ public class World {
 		}
 		x=size/2;
 		y=size/2;
+		entity.add(new Road(x,y));
 	}
 	public void tick(){
 		y1++;
