@@ -23,7 +23,7 @@ public class World {
 	double v=0;
 	public static ArrayList<Entity> entity=new ArrayList<Entity>();
 	public World(){
-		tickrate=60;
+		tickrate=600;
 		gen(50);
 	}
 	public void gen(int size){
