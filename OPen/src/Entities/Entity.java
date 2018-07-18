@@ -33,4 +33,7 @@ public abstract class Entity {
 		g.setColor(Color.BLACK);
 		g.drawRect(tx,ty,tsx,tsy);
 	}
+	public void remove() {
+		
+	}
 }

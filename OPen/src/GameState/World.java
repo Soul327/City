@@ -18,11 +18,12 @@ public class World {
 	int[][] land;
 	public static int x=0,y=0,scale=50,tick=0,timeTick=0,pop=0,maxPop=0,trainers=0,tempPop=0;
 	public static long money=20000;
-	public static double pre=0,tr=1;
+	public static double pre=0,tr=1,tickrate;
 	int y1=0,y2=0;
 	double v=0;
 	public static ArrayList<Entity> entity=new ArrayList<Entity>();
 	public World(){
+		tickrate=60;
 		gen(50);
 	}
 	public void gen(int size){
@@ -40,7 +41,7 @@ public class World {
 		pre=0;maxPop=0;tempPop=pop;
 		if(tick!=0){tick++;}if(tick>10){tick=0;}
 		if(timeTick!=0){timeTick++;}
-		if(timeTick>60){timeTick=0;}
+		if(timeTick>tickrate){timeTick=0;}
 		if(timeTick==0){
 			//System.out.println("");
 			y2=y1;
@@ -60,7 +61,8 @@ public class World {
 		if(Game.keyManager.z&tick==0&scale<200){scale++;tick++;}
 		boolean flip=false;
 		Entity temp=null;
-		for(int z=0;z<entity.size();z++){
+		int z=0;
+		for(z=0;z<entity.size();z++){
 			for(int t1=0;t1<entity.get(z).sx;t1++){
 				for(int t2=0;t2<entity.get(z).sy;t2++){
 					if(entity.get(z).x+t1==x & entity.get(z).y+t2==y){
@@ -70,7 +72,7 @@ public class World {
 				}
 			}
 		}
-		if(Game.keyManager.zero&flip&tick==0){money+=temp.cost/3;entity.remove(temp);tick++;}
+		if(Game.keyManager.zero&flip&tick==0){temp.remove();money+=temp.cost/3;entity.remove(temp);tick++;}
 		if(!flip&tick==0){
 			boolean t=false;
 			if(Game.keyManager.nums[1]){entity.add(new BasicHouse(x,y));t=true;}
@@ -86,7 +88,7 @@ public class World {
 			}
 		}
 		sort();
-		for(int z=0;z<entity.size();z++){entity.get(z).tick();}
+		for(z=0;z<entity.size();z++){entity.get(z).tick();}
 		trainers=(int)((v*1)*pre);
 	}
 	public void sort(){

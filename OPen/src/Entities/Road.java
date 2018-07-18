@@ -10,11 +10,15 @@ public class Road extends Entity{
 		this.x=x;
 		this.y=y;
 		cost=20;
+		GameState.World.tickrate-=.1;
 	}
 	public void render(Graphics g){
 		prerender();
 		g.drawImage(Assets.assets[5],tx,ty,tsx,tsy,null);
 		g.setColor(Color.BLACK);
 		g.drawRect(tx,ty,tsx,tsy);
+	}
+	public void remove() {
+		GameState.World.tickrate+=.1;
 	}
 }
