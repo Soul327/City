@@ -9,7 +9,7 @@ public class UI {
 	int width=Game.width,height=Game.height;
 	public void tick(){}
 	public void render(Graphics g){
-		g.setColor(Color.RED);
-		g.fillRect(width-(width/2),200,100,100);
+		g.setColor(Color.GREEN);
+		g.fillRect((width/100),height-(height/20),100,100);
 	}
 }
