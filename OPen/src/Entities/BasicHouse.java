@@ -25,16 +25,15 @@ public class BasicHouse extends Entity{
 	public void render(Graphics g){
 		prerender();
 		switch(image){
-		case 0:g.drawImage(Assets.assets[0],tx,ty,tsx,tsy,null);break;
-		case 1:g.drawImage(Assets.assets[6],tx,ty,tsx,tsy,null);break;
-		case 2:g.drawImage(Assets.assets[7],tx,ty,tsx,tsy,null);break;
-		case 3:g.drawImage(Assets.assets[8],tx,ty,tsx,tsy,null);break;
-		case 4:g.drawImage(Assets.assets[9],tx,ty,tsx,tsy,null);break;
+			case 0:g.drawImage(Assets.assets[0],tx,ty,tsx,tsy,null);break;
+			case 1:g.drawImage(Assets.assets[6],tx,ty,tsx,tsy,null);break;
+			case 2:g.drawImage(Assets.assets[7],tx,ty,tsx,tsy,null);break;
+			case 3:g.drawImage(Assets.assets[8],tx,ty,tsx,tsy,null);break;
+			case 4:g.drawImage(Assets.assets[9],tx,ty,tsx,tsy,null);break;
 		}
-		//g.fillRect(tx,ty,tsx,tsy);
 		if(tick>0){
 			tick--;
-			g.drawImage(Assets.assets[14],tx,ty,tsx,tsy,null);
+			g.drawImage(Assets.assets[14],tx+(tsx/4),ty,tsx-(tsx/4)*2,tsy-(tsy/4)*2,null);
 		}
 		ting=false;
 		g.setColor(Color.BLACK);
