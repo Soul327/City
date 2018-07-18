@@ -7,7 +7,7 @@ import GameState.World;
 import Misc.Assets;
 
 public class PokeMart extends Entity{
-	public int tick=0,income=-100,image;
+	public int tick=0,income=-1000,image;
 	public PokeMart(int x,int y){
 		this.x=x;
 		this.y=y;
@@ -17,7 +17,7 @@ public class PokeMart extends Entity{
 	}
 	public void timeTick(){
 		income=-100;
-		income+=(GameState.World.trainers*1000*Math.random());
+		income+=(GameState.World.trainers*10*Math.random());
 		incame=income;
 		GameState.World.money+=income;
 		tick=10;

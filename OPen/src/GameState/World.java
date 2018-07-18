@@ -16,14 +16,14 @@ import Misc.Assets;
 
 public class World {
 	int[][] land;
-	public static int x=0,y=0,scale=50,tick=0,timeTick=0,pop=0,maxPop=0,trainers=0,tempPop=0,need=50;
+	public static int x=0,y=0,scale=50,tick=0,tick2=0,timeTick=0,pop=0,maxPop=0,trainers=0,tempPop=0,need=50;
 	public static long money=20000;
 	public static double pre=0,tr=1,tickrate;
 	int y1=0,y2=0;
 	double v=0;
 	public static ArrayList<Entity> entity=new ArrayList<Entity>();
 	public World(){
-		tickrate=600;
+		tickrate=60;
 		gen(50);
 	}
 	public void gen(int size){
@@ -43,6 +43,7 @@ public class World {
 		y1++;
 		pre=0;maxPop=0;tempPop=pop;
 		if(tick!=0){tick++;}if(tick>10){tick=0;}
+		if(tick2!=0){tick2++;}if(tick2>10){tick2=0;}
 		if(timeTick!=0){timeTick++;}
 		if(timeTick>tickrate){timeTick=0;}
 		for(int z=0;z<entity.size();z++){entity.get(z).tick();}
@@ -65,39 +66,69 @@ public class World {
 		if(Game.keyManager.z&tick==0&scale<200){scale++;tick++;}
 		if(Game.keyManager.i&tick==0){}
 		if(Game.keyManager.space&tick==0){Game.debug=!Game.debug;tick++;}
-		boolean flip=false;
-		Entity temp=null;
-		for(int z=0;z<entity.size();z++){
-			for(int t1=0;t1<entity.get(z).sx;t1++){
-				for(int t2=0;t2<entity.get(z).sy;t2++){
-					if(entity.get(z).x+t1==x & entity.get(z).y+t2==y){
-						flip=true;
-						temp=entity.get(z);
+		//Entity temp=isHover(x,y);
+		//if(temp!=null){flip=true;}
+		//Delete
+		if(Game.keyManager.zero&tick==0){
+			Entity temp=isHover(x,y);
+			if(temp!=null){
+				temp.remove();
+				money+=temp.cost/3;
+				entity.remove(temp);
+				tick++;
+			}
+		}
+		//Create
+		if(tick2==0){
+			boolean t=false;
+			Entity temp=null,temp2=null;
+			if(Game.keyManager.nums[1]){temp2=new BasicHouse(x,y);}
+			if(Game.keyManager.nums[2]){temp2=new PokeCenter(x,y);}
+			if(Game.keyManager.nums[3]){temp2=new PokeMart(x,y);}
+			if(Game.keyManager.nums[4]){temp2=new Gym(x,y);}
+			if(Game.keyManager.nums[5]){temp2=new Tree(x,y);}
+			if(Game.keyManager.nums[6]){temp2=new Road(x,y);}
+			if(temp2!=null){
+				for(int t1=0;t1<temp2.sx;t1++){
+					for(int t2=0;t2<temp2.sy;t2++){
+						if(temp==null)
+							temp=isHover(x+t1,y+t2);
 					}
+				}
+				if(temp==null){
+					entity.add(temp2);
+					t=true;
+				}
+			}
+			if(t){
+				if(temp==null) {
+					entity.get(entity.size()-1).buy();
+					tick2++;
+				}else{
+					entity.get(entity.size()-1).remove();
+					entity.remove(entity.size()-1);
 				}
 			}
 		}
-		if(Game.keyManager.zero&flip&tick==0){temp.remove();money+=temp.cost/3;entity.remove(temp);tick++;}
-		if(!flip&tick==0){
-			boolean t=false;
-			if(Game.keyManager.nums[1]){entity.add(new BasicHouse(x,y));t=true;}
-			if(Game.keyManager.nums[2]){entity.add(new PokeCenter(x,y));t=true;}
-			if(Game.keyManager.nums[3]){entity.add(new PokeMart(x,y));t=true;}
-			if(Game.keyManager.nums[4]){entity.add(new Gym(x,y));t=true;}
-			if(Game.keyManager.nums[5]){entity.add(new Tree(x,y));t=true;}
-			if(Game.keyManager.nums[6]){entity.add(new Road(x,y));t=true;}
-			if(t){
-				entity.get(entity.size()-1).buy();
-				flip=true;
-				tick++;
-			}
-		}	
-			if(Game.keyManager.upgrade&&!(temp==null)&tick==0){temp.upgrade();tick++;};
+			//if(Game.keyManager.upgrade&&!(temp==null)&tick==0){temp.upgrade();tick++;};
 		sort();
 		
 		trainers=(int)((v*1)*pre);
 		if(need<0){need=0;}
 		if(need>100){need=100;}
+	}
+	public Entity isHover(int x,int y){
+		Entity temp=null;
+		for(int z=0;z<entity.size();z++){
+			for(int t1=0;t1<entity.get(z).sx;t1++){
+				for(int t2=0;t2<entity.get(z).sy;t2++){
+					if(entity.get(z).x+t1==x & entity.get(z).y+t2==y){
+						temp=entity.get(z);
+					}
+				}
+			}
+		}
+		return temp;
 	}
 	public void sort(){
 		for(int z=0;z<entity.size()-1;z++){

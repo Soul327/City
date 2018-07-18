@@ -15,7 +15,7 @@ public class Road extends Entity{
 		name="Road";
 	}
 	public void timeTick(){
-		GameState.World.money-=1;
+		GameState.World.money-=10;
 	}
 	public void render(Graphics g){
 		prerender();

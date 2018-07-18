@@ -8,7 +8,7 @@ import Misc.Assets;
 
 public abstract class Entity {
 	public int x=0,y=0,sx=1,sy=1,tx=0,ty=0,tsx=0,tsy=0,cost=0,fontSize=12,incame=0;
-	String name="Missing Name";
+	public String name="Missing Name";
 	public void tick(){
 		
 	}
@@ -30,8 +30,6 @@ public abstract class Entity {
 		prerender();
 		g.setColor(Color.ORANGE);
 		g.fillRect(tx,ty,tsx,tsy);
-		//g.setColor(Color.BLACK);
-		//g.drawRect(tx,ty,tsx,tsy);
 	}
 	public void renderIncome(Graphics g,int incame){
 		int platinum=0,gold=0,silver=0,bronze=incame,loc=0,inc=10,tot;
