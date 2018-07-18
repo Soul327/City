@@ -6,7 +6,7 @@ public class KeyManager implements KeyListener {
 	
 	public boolean[] keys,nums=new boolean[10];
 	public boolean w,a,s,d,re,up,down,left,right,space,z,x,i;
-	public boolean one,two,three,four,zero;
+	public boolean one,two,three,four,zero,upgrade;
 	
 	public KeyManager(){
 		keys = new boolean[256];
@@ -37,6 +37,7 @@ public class KeyManager implements KeyListener {
 		nums[7]=keys[KeyEvent.VK_7];
 		nums[8]=keys[KeyEvent.VK_8];
 		nums[9]=keys[KeyEvent.VK_9];
+		upgrade=keys[KeyEvent.VK_F];
 	}
 	@Override
 	public void keyPressed(KeyEvent e) {

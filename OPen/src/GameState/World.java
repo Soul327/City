@@ -44,6 +44,7 @@ public class World {
 		if(timeTick!=0){timeTick++;}
 		if(timeTick>tickrate){timeTick=0;}
 		if(timeTick==0){
+			//System.out.println("");
 			y2=y1;
 			y1=0;
 			v=Math.random();
@@ -52,19 +53,18 @@ public class World {
 			}
 			timeTick++;
 		}
+		//System.out.println(pre);
 		if(Game.keyManager.w&tick==0){y--;tick++;}
 		if(Game.keyManager.s&tick==0){y++;tick++;}
 		if(Game.keyManager.a&tick==0){x--;tick++;}
 		if(Game.keyManager.d&tick==0){x++;tick++;}
 		if(Game.keyManager.x&tick==0&scale>2){scale--;tick++;}
 		if(Game.keyManager.z&tick==0&scale<200){scale++;tick++;}
-		if(Game.keyManager.i&tick==0){
-			
-		}
+		if(Game.keyManager.i&tick==0){}
 		boolean flip=false;
 		Entity temp=null;
-		//Check if you can place
-		for(int z=0;z<entity.size();z++){
+		int z=0;
+		for(z=0;z<entity.size();z++){
 			for(int t1=0;t1<entity.get(z).sx;t1++){
 				for(int t2=0;t2<entity.get(z).sy;t2++){
 					if(entity.get(z).x+t1==x & entity.get(z).y+t2==y){
@@ -88,13 +88,13 @@ public class World {
 				flip=true;
 				tick++;
 			}
-		}
+		}	
+			if(Game.keyManager.upgrade&&!(temp==null)&tick==0){temp.upgrade();tick++;};
 		sort();
-		for(int z=0;z<entity.size();z++){entity.get(z).tick();}//Ticks entities
+		for(z=0;z<entity.size();z++){entity.get(z).tick();}
 		trainers=(int)((v*1)*pre);
 	}
 	public void sort(){
-		//Sorts which entity is on top
 		for(int z=0;z<entity.size()-1;z++){
 			if(entity.get(z).y>entity.get(z+1).y){
 				Entity temp=entity.get(z);
@@ -108,7 +108,7 @@ public class World {
 			for(int x=0;x<land[y].length;x++){
 				int tx=(x*scale)+((-World.x-1)*scale)+Game.width/2+(scale/2);
 				int ty=(y*scale)+((-World.y-1)*scale)+Game.height/2+(scale/2);
-				if(!(tx>-scale&ty>-scale&tx+scale>Game.width&ty+scale>Game.height)){//Checks if it is on screen (broken?)
+				if(!(tx>-scale&ty>-scale&tx+scale>Game.width&ty+scale>Game.height)){
 					switch(land[y][x]){
 						case 0:g.drawImage(Assets.assets[1],tx,ty,scale,scale,null);break;
 						case 1:g.drawImage(Assets.assets[2],tx,ty,scale,scale,null);break;
@@ -116,9 +116,10 @@ public class World {
 						case 3:g.drawImage(Assets.assets[4],tx,ty,scale,scale,null);break;
 						default:g.setColor(Color.WHITE);
 					}
+					//g.setColor(Color.green);g.fillRect(tx,ty,scale,scale);
 				}
 				g.setColor(Color.BLACK);
-				//g.drawRect(tx,ty,scale,scale);
+				g.drawRect(tx,ty,scale,scale);
 			}
 		}
 		for(int z=0;z<entity.size();z++){entity.get(z).render(g);}
