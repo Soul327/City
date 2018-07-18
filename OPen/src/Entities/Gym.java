@@ -17,7 +17,7 @@ public class Gym extends Entity{
 		GameState.World.money+=income;
 	}
 	public void tick(){
-		GameState.World.pre+=10;
+		GameState.World.pre+=20;
 	}
 	public void render(Graphics g){
 		prerender();
