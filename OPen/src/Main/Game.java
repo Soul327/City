@@ -51,9 +51,9 @@ public class Game implements Runnable {
 
 	private void init(){
 		frame = new JFrame(title);
-		frame.setSize(width, height);
+		frame.setSize(width,height);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setResizable(true);
+		frame.setResizable(false);
 		frame.setLocationRelativeTo(null);
 		frame.setVisible(true);
 		frame.addMouseListener(mouseManager);
@@ -98,7 +98,7 @@ public class Game implements Runnable {
 		init();
 		int fps = 60;
 		double timePerTick = 1000000000 / fps;
-		double delta = 0;
+		double delta=0;
 		long now;
 		long lastTime = System.nanoTime();
 		long timer = 0;
