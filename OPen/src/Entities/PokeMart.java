@@ -14,10 +14,12 @@ public class PokeMart extends Entity{
 		sx=2;sy=2;
 		cost=5000;
 		name="PokeMart";
+		happy=1;
+		World.happy+=happy;
 	}
 	public void timeTick(){
 		income=-100;
-		income+=(GameState.World.trainers*10*Math.random());
+		income+=(GameState.World.trainers*50*Math.random());
 		incame=income;
 		GameState.World.money+=income;
 		tick=10;

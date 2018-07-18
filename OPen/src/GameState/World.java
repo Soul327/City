@@ -4,26 +4,31 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.util.ArrayList;
+
 import Entities.BasicHouse;
 import Entities.Entity;
+import Entities.Flower;
 import Entities.Gym;
+import Entities.Ledge;
 import Entities.PokeCenter;
 import Entities.PokeMart;
 import Entities.Road;
+import Entities.TallGrass;
 import Entities.Tree;
+import Entities.WareHouse;
 import Main.Game;
 import Misc.Assets;
 
 public class World {
 	int[][] land;
-	public static int x=0,y=0,scale=50,tick=0,tick2=0,timeTick=0,pop=0,maxPop=0,trainers=0,tempPop=0,need=50;
+	public static int x=0,y=0,scale=50,tick=0,tick2=0,timeTick=0,pop=0,maxPop=0,trainers=0,tempPop=0,need=50,happy=0;
 	public static long money=20000;
 	public static double pre=0,tr=1,tickrate;
 	int y1=0,y2=0;
 	double v=0;
 	public static ArrayList<Entity> entity=new ArrayList<Entity>();
 	public World(){
-		tickrate=60;
+		tickrate=600;
 		gen(50);
 	}
 	public void gen(int size){
@@ -36,7 +41,7 @@ public class World {
 		x=size/2;
 		y=size/2;
 		entity.add(new Road(x,y));
-		entity.add(new Tree(x+2,y+2));
+		//entity.add(new WareHouse(x+2,y+2));
 	}
 	public void tick(){
 		need=50;
@@ -57,7 +62,8 @@ public class World {
 			}
 			timeTick++;
 		}
-		//System.out.println(pre);
+		if(need<0){need=0;}
+		if(need>100){need=100;}
 		if(Game.keyManager.w&tick==0){y--;tick++;}
 		if(Game.keyManager.s&tick==0){y++;tick++;}
 		if(Game.keyManager.a&tick==0){x--;tick++;}
@@ -66,8 +72,6 @@ public class World {
 		if(Game.keyManager.z&tick==0&scale<200){scale++;tick++;}
 		if(Game.keyManager.i&tick==0){}
 		if(Game.keyManager.space&tick==0){Game.debug=!Game.debug;tick++;}
-		//Entity temp=isHover(x,y);
-		//if(temp!=null){flip=true;}
 		//Delete
 		if(Game.keyManager.zero&tick==0){
 			Entity temp=isHover(x,y);
@@ -88,6 +92,11 @@ public class World {
 			if(Game.keyManager.nums[4]){temp2=new Gym(x,y);}
 			if(Game.keyManager.nums[5]){temp2=new Tree(x,y);}
 			if(Game.keyManager.nums[6]){temp2=new Road(x,y);}
+			if(Game.keyManager.nums[7]){temp2=new WareHouse(x,y);}
+			if(Game.keyManager.nums[8]){temp2=new TallGrass(x,y);}
+			if(Game.keyManager.nums[9]){temp2=new Ledge(x,y);}
+			if(Game.keyManager.nums[0]){temp2=new Flower(x,y);}
+			
 			if(temp2!=null){
 				for(int t1=0;t1<temp2.sx;t1++){
 					for(int t2=0;t2<temp2.sy;t2++){
@@ -98,6 +107,8 @@ public class World {
 				if(temp==null){
 					entity.add(temp2);
 					t=true;
+				}else{
+					temp2.remove();
 				}
 			}
 			if(t){
@@ -109,13 +120,16 @@ public class World {
 					entity.remove(entity.size()-1);
 				}
 			}
+			/*
+			if(Game.keyManager.upgrade&tick==0){
+				temp.upgrade();
+				tick++;
+			};
+			*/
 		}
-			//if(Game.keyManager.upgrade&&!(temp==null)&tick==0){temp.upgrade();tick++;};
 		sort();
-		
+		if(pre<0){pre=0;}
 		trainers=(int)((v*1)*pre);
-		if(need<0){need=0;}
-		if(need>100){need=100;}
 	}
 	public Entity isHover(int x,int y){
 		Entity temp=null;
@@ -164,7 +178,7 @@ public class World {
 		g.setColor(Color.BLACK);
 		g.fillRect(Game.width/2-5,Game.height/2-5,10,10);
 		g.setFont(new Font("TimesRoman",Font.PLAIN,Game.fontSize));
-		g.drawString("$"+money+" Tran:"+trainers+" fps"+Game.fps,0,Game.fontSize);
+		g.drawString("$"+money+" Tran:"+trainers+" Happy:"+happy+" fps"+Game.fps,0,Game.fontSize);
 		g.drawString("X:"+(x+1)+"Y:"+(y+1)+" tick:"+y1+" "+y2,0,Game.fontSize*2);
 	}
 }

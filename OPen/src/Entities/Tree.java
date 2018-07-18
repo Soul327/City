@@ -13,10 +13,12 @@ public class Tree extends Entity{
 		sx=2;sy=2;
 		cost=100;
 		name="Tree";
+		happy=2;
+		World.happy+=happy;
 	}
 	public void tick(){
 		World.pre-=.1;
-		World.need-=1;
+		World.need+=.5;
 	}
 	public void timeTick(){
 		World.money+=income;

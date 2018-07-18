@@ -28,6 +28,12 @@ public class Assets {
 		assets[16] = ImageLoader.loadImage("/Sprites/silvercoin.png");
 		assets[17] = ImageLoader.loadImage("/Sprites/goldcoin.png");
 		assets[18] = ImageLoader.loadImage("/Sprites/platinum.png");
+		assets[19] = ImageLoader.loadImage("/Sprites/warehouse.png");
+		assets[20] = ImageLoader.loadImage("/Sprites/tallGrass.png");
+		assets[21] = ImageLoader.loadImage("/Sprites/ledge.png");
+		assets[22] = ImageLoader.loadImage("/Sprites/water.png");
+		assets[23] = ImageLoader.loadImage("/Sprites/flower.png");
+		assets[24] = ImageLoader.loadImage("/Sprites/warehouse2.png");
 		
 		//File actual = new File("C:\\Users\\Soul327\\eclipse-workspace\\OPen\\res\\Sprites");
 		//for( File f : actual.listFiles()){System.out.println( f.getName()+" "+f.getAbsolutePath());}

@@ -1,26 +1,25 @@
 package Entities;
 
-import java.awt.Color;
 import java.awt.Graphics;
 
 import GameState.World;
 import Misc.Assets;
 
-public class PokeCenter extends Entity{
-	public int tick=0,income=-2000,image;
+public class WareHouse extends Entity{
+	public int tick=0,income=-300;
 	public double hold=0;
-	public PokeCenter(int x,int y){
+	public WareHouse(int x,int y){
 		this.x=x;
 		this.y=y;
-		sx=3;sy=3;
-		cost=10000;
-		name="PokeCenter";
-		happy=4;
+		sx=2;sy=2;
+		cost=1000;
+		name="Ware House";
+		happy=-20;
 		World.happy+=happy;
 	}
 	public void timeTick(){
 		GameState.World.money+=income;
-		hold=(Math.random()*10)+(Math.random()*10)+(Math.random()*10)+(Math.random()*10)+(Math.random()*10);
+		hold=-(Math.random()*10);
 	}
 	public void tick(){
 		GameState.World.pre+=hold;
@@ -28,6 +27,6 @@ public class PokeCenter extends Entity{
 	}
 	public void render(Graphics g){
 		prerender();
-		g.drawImage(Assets.assets[10],tx,ty,tsx,tsy,null);
+		g.drawImage(Assets.assets[19],tx,ty,tsx,tsy,null);
 	}
 }

@@ -7,7 +7,7 @@ import Main.Game;
 import Misc.Assets;
 
 public abstract class Entity {
-	public int x=0,y=0,sx=1,sy=1,tx=0,ty=0,tsx=0,tsy=0,cost=0,fontSize=12,incame=0;
+	public int x=0,y=0,sx=1,sy=1,tx=0,ty=0,tsx=0,tsy=0,cost=0,fontSize=12,incame=0,happy=0;
 	public String name="Missing Name";
 	public void tick(){
 		
@@ -23,6 +23,7 @@ public abstract class Entity {
 		if(World.money>=cost){
 			World.money-=cost;
 		}else{
+			remove();
 			World.entity.remove(this);
 		}
 	}
@@ -58,6 +59,8 @@ public abstract class Entity {
 		g.drawString(name,tx,ty+(fontSize*z)+tsy);z++;
 		g.drawString("x:"+x+" y:"+y+" tx:"+tx+" ty:"+ty,tx,ty+(fontSize*z)+tsy);z++;
 	}
-	public void remove(){}
+	public void remove(){
+		World.happy-=happy;
+	}
 	public void upgrade(){}
 }

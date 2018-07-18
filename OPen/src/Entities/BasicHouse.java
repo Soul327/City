@@ -16,6 +16,8 @@ public class BasicHouse extends Entity{
 		cost=1000;
 		image=(int)(Math.random()*5);
 		name="Basic House";
+		happy=1;
+		World.happy+=happy;
 	}
 	public void tick(){
 		GameState.World.maxPop+=4;
@@ -23,7 +25,10 @@ public class BasicHouse extends Entity{
 	}
 	public void timeTick(){
 		//ting=true;
-		temp=income*level*World.need;
+		temp=(income*level*World.need)+World.happy;
+		if(temp<0){
+			temp=0;
+		}
 		GameState.World.money+=temp;
 		if(temp!=0){tick=10;}
 	}

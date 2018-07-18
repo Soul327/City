@@ -13,18 +13,18 @@ public class Gym extends Entity{
 		this.y=y;
 		sx=4;sy=4;
 		cost=500000;
+		happy=100;
+		World.happy+=happy;
 	}
 	public void timeTick(){
 		GameState.World.money+=income;
 	}
 	public void tick(){
-		GameState.World.pre+=20;
-		World.need+=10;
+		GameState.World.pre+=40;
+		World.need+=20;
 	}
 	public void render(Graphics g){
 		prerender();
 		g.drawImage(Assets.assets[12],tx,ty,tsx,tsy,null);
-		g.setColor(Color.BLACK);
-		g.drawRect(tx,ty,tsx,tsy);
 	}
 }

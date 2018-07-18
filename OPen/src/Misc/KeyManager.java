@@ -17,10 +17,10 @@ public class KeyManager implements KeyListener {
 		a=keys[KeyEvent.VK_A];
 		s=keys[KeyEvent.VK_S];
 		w=keys[KeyEvent.VK_W];
-		x=keys[KeyEvent.VK_X];
+		x=keys[KeyEvent.VK_C];
 		z=keys[KeyEvent.VK_Z];
 		i=keys[KeyEvent.VK_I];
-		zero=keys[KeyEvent.VK_0];
+		zero=keys[KeyEvent.VK_X];
 		up=keys[KeyEvent.VK_UP];
 		down=keys[KeyEvent.VK_DOWN];
 		left=keys[KeyEvent.VK_LEFT];

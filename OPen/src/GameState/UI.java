@@ -15,13 +15,12 @@ public class UI {
 	int x=16,y=9;
 	public UI(){
 	}
-	public void tick(){
-	}
+	public void tick(){}
 	public void render(Graphics g){
 		g.setColor(Color.LIGHT_GRAY);
-		g.setColor(Color.GREEN);
-		g.fillRect(x,y*77,x*20,y*2);
 		g.setColor(Color.BLUE);
+		g.fillRect(x,y*77,x*20,y*2);
+		g.setColor(Color.GREEN);
 		g.fillRect(x,y*77,(int)((x*20)*(World.need/100.0)),y*2);
 		g.setColor(Color.BLACK);
 		g.drawRect(x,y*77,x*20,y*2);
@@ -40,7 +39,14 @@ public class UI {
 		g.drawString(""+temp,x*3,y*(10+(temp*5)));
 		g.drawImage(Assets.assets[5],0,y*(10+(temp*5)),x*3,y*5,null);temp++;
 		g.drawString(""+temp,x*3,y*(10+(temp*5)));
-		//g.drawImage(Assets.assets[0],0,y*(10+(temp*5)),x*3,y*5,null);temp++;
+		g.drawImage(Assets.assets[19],0,y*(10+(temp*5)),x*3,y*5,null);temp++;
+		g.drawString(""+temp,x*3,y*(10+(temp*5)));
+		g.drawImage(Assets.assets[20],0,y*(10+(temp*5)),x*3,y*5,null);temp++;
+		g.drawString(""+temp,x*3,y*(10+(temp*5)));
+		g.drawImage(Assets.assets[21],0,y*(10+(temp*5)),x*3,y*5,null);temp++;
+		g.drawString(""+temp,x*3,y*(10+(temp*5)));
+		g.drawImage(Assets.assets[23],0,y*(10+(temp*5)),x*3,y*5,null);temp++;
+		g.drawString(""+temp,x*3,y*(10+(temp*5)));
 		if(Game.debug){
 			//devRender(g);
 			for(int z=0;z<World.entity.size();z++){World.entity.get(z).renderDebug(g);}
