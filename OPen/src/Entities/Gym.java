@@ -3,6 +3,7 @@ package Entities;
 import java.awt.Color;
 import java.awt.Graphics;
 
+import GameState.World;
 import Misc.Assets;
 
 public class Gym extends Entity{
@@ -18,6 +19,7 @@ public class Gym extends Entity{
 	}
 	public void tick(){
 		GameState.World.pre+=20;
+		World.need+=10;
 	}
 	public void render(Graphics g){
 		prerender();

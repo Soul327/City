@@ -3,6 +3,7 @@ package Entities;
 import java.awt.Color;
 import java.awt.Graphics;
 
+import GameState.World;
 import Misc.Assets;
 
 public class PokeCenter extends Entity{
@@ -13,6 +14,7 @@ public class PokeCenter extends Entity{
 		this.y=y;
 		sx=3;sy=3;
 		cost=5000;
+		name="PokeCenter";
 	}
 	public void timeTick(){
 		GameState.World.money+=income;
@@ -20,11 +22,10 @@ public class PokeCenter extends Entity{
 	}
 	public void tick(){
 		GameState.World.pre+=hold;
+		World.need+=10;
 	}
 	public void render(Graphics g){
 		prerender();
 		g.drawImage(Assets.assets[10],tx,ty,tsx,tsy,null);
-		g.setColor(Color.BLACK);
-		g.drawRect(tx,ty,tsx,tsy);
 	}
 }

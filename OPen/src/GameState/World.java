@@ -16,7 +16,7 @@ import Misc.Assets;
 
 public class World {
 	int[][] land;
-	public static int x=0,y=0,scale=50,tick=0,timeTick=0,pop=0,maxPop=0,trainers=0,tempPop=0;
+	public static int x=0,y=0,scale=50,tick=0,timeTick=0,pop=0,maxPop=0,trainers=0,tempPop=0,need=50;
 	public static long money=20000;
 	public static double pre=0,tr=1,tickrate;
 	int y1=0,y2=0;
@@ -36,8 +36,10 @@ public class World {
 		x=size/2;
 		y=size/2;
 		entity.add(new Road(x,y));
+		entity.add(new Tree(x+2,y+2));
 	}
 	public void tick(){
+		need=50;
 		y1++;
 		pre=0;maxPop=0;tempPop=pop;
 		if(tick!=0){tick++;}if(tick>10){tick=0;}
@@ -61,6 +63,7 @@ public class World {
 		if(Game.keyManager.x&tick==0&scale>2){scale--;tick++;}
 		if(Game.keyManager.z&tick==0&scale<200){scale++;tick++;}
 		if(Game.keyManager.i&tick==0){}
+		if(Game.keyManager.space&tick==0){Game.debug=!Game.debug;tick++;}
 		boolean flip=false;
 		Entity temp=null;
 		int z=0;
@@ -93,6 +96,8 @@ public class World {
 		sort();
 		for(z=0;z<entity.size();z++){entity.get(z).tick();}
 		trainers=(int)((v*1)*pre);
+		if(need<0){need=0;}
+		if(need>100){need=100;}
 	}
 	public void sort(){
 		for(int z=0;z<entity.size()-1;z++){
@@ -118,11 +123,13 @@ public class World {
 					}
 					//g.setColor(Color.green);g.fillRect(tx,ty,scale,scale);
 				}
-				g.setColor(Color.BLACK);
-				g.drawRect(tx,ty,scale,scale);
+				//g.setColor(Color.BLACK);
+				//g.drawRect(tx,ty,scale,scale);
 			}
 		}
-		for(int z=0;z<entity.size();z++){entity.get(z).render(g);}
+		for(int z=0;z<entity.size();z++){
+			entity.get(z).render(g);
+		}
 		g.setColor(Color.BLACK);
 		g.fillRect(Game.width/2-5,Game.height/2-5,10,10);
 		g.setFont(new Font("TimesRoman",Font.PLAIN,Game.fontSize));

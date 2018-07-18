@@ -1,14 +1,14 @@
 package Entities;
-
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
-
 import GameState.World;
 import Main.Game;
 import Misc.Assets;
 
 public abstract class Entity {
-	public int x=0,y=0,sx=1,sy=1,tx=0,ty=0,tsx=0,tsy=0,cost=0;
+	public int x=0,y=0,sx=1,sy=1,tx=0,ty=0,tsx=0,tsy=0,cost=0,fontSize=12;
+	String name="Missing Name";
 	public void tick(){
 		
 	}
@@ -30,13 +30,18 @@ public abstract class Entity {
 		prerender();
 		g.setColor(Color.ORANGE);
 		g.fillRect(tx,ty,tsx,tsy);
-		g.setColor(Color.BLACK);
+		//g.setColor(Color.BLACK);
+		//g.drawRect(tx,ty,tsx,tsy);
+	}
+	public void renderDebug(Graphics g){
+		int z=1;
+		g.setColor(Color.BLUE);
 		g.drawRect(tx,ty,tsx,tsy);
+		g.setColor(Color.BLACK);
+		g.setFont(new Font("TimesRoman",Font.PLAIN,fontSize));
+		g.drawString(name,tx,ty+(fontSize*z)+tsy);z++;
+		g.drawString("x:"+x+" y:"+y+" tx:"+tx+" ty:"+ty,tx,ty+(fontSize*z)+tsy);z++;
 	}
-	public void remove() {
-		
-	}
-	public void upgrade(){
-		
-	}
+	public void remove(){}
+	public void upgrade(){}
 }

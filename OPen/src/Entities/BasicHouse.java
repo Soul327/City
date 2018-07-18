@@ -3,6 +3,7 @@ package Entities;
 import java.awt.Color;
 import java.awt.Graphics;
 
+import GameState.World;
 import Misc.Assets;
 
 public class BasicHouse extends Entity{
@@ -14,9 +15,11 @@ public class BasicHouse extends Entity{
 		sx=2;sy=2;
 		cost=1000;
 		image=(int)(Math.random()*5);
+		name="Basic House";
 	}
 	public void tick(){
 		GameState.World.maxPop+=4;
+		World.need-=5;
 	}
 	public void timeTick(){
 		ting=true;tick=10;
@@ -38,8 +41,6 @@ public class BasicHouse extends Entity{
 			}
 		}
 		ting=false;
-		g.setColor(Color.BLACK);
-		g.drawRect(tx,ty,tsx,tsy);
 	}
 	public void upgrade(){
 		int upcost=(int)(cost*(Math.pow(level+1, 2)));

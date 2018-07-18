@@ -3,6 +3,7 @@ package Entities;
 import java.awt.Color;
 import java.awt.Graphics;
 
+import GameState.World;
 import Misc.Assets;
 
 public class PokeMart extends Entity{
@@ -12,11 +13,15 @@ public class PokeMart extends Entity{
 		this.y=y;
 		sx=2;sy=2;
 		cost=5000;
+		name="PokeMart";
 	}
 	public void timeTick(){
 		income=-100;
 		income+=(GameState.World.trainers*1000*Math.random());
 		GameState.World.money+=income;
+	}
+	public void tick(){
+		World.need+=10;
 	}
 	public void render(Graphics g){
 		prerender();
